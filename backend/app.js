@@ -5,12 +5,14 @@ const cookieParser = require('cookie-parser')
 const fileUpload = require('express-fileupload')
 const cloudinary = require('cloudinary')
 const dotenv = require('dotenv');
-
+const cors = require('cors')
 const errorMiddlerware = require('./middlewares/error')
 
 // Setting up config file
+
 dotenv.config({ path: 'backend/config/config.env' })
 
+app.use(cors())
 app.use(express.json({limit: '50mb'}));
 app.use(express.urlencoded({limit: '50mb',extended: true})); 
 app.use(cookieParser())
