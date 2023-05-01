@@ -11,11 +11,11 @@ const sendToken = (user, statusCode, res) => {
       Date.now() + process.env.COOKIE_EXPIRES_TIME * 24 * 60 * 60 * 1000
     ),
     //With this key in true guarantee that the cookie cant be access by JS Code.
-    httpOnly: true,
-    
+    SameSite: 'None',
+    Secure: true
     
   }
-  res.setHeader('Set-Cookie', `token=${token}; SameSite=None; Secure`);
+
 
   res.status(statusCode).cookie('token', token, options).json({
     success: true,
