@@ -15,7 +15,7 @@ const sendToken = (user, statusCode, res) => {
     
     
   }
-  res.setHeader('Set-Cookie', 'token=YOUR_TOKEN; SameSite=None; Secure');
+  res.setHeader('Set-Cookie', `token=${token}; SameSite=None; Secure`);
 
   res.status(statusCode).cookie('token', token, options).json({
     success: true,
