@@ -1,28 +1,26 @@
-// Create and send Token and save in the cookie.
+// create and send token and save in the cookie / to ut everything inside a token
 
 const sendToken = (user, statusCode, res) => {
+  // the user will be the userschema attached in the authusercontrolllers, also the status code too, but the res is from here
 
-  //Create Jwt Token
+  //create jwt token
   const token = user.getJwtToken();
 
-  // Options for cookie
+  //to store jwt token in the cookie, we prepare options
   const options = {
-    expires: new Date(
-      Date.now() + process.env.COOKIE_EXPIRES_TIME * 24 * 60 * 60 * 1000
-    ),
-    //With this key in true guarantee that the cookie cant be access by JS Code.
-    SameSite: 'None',
-    Secure: true
-    
+      expires: new Date(
+          Date.now() + process.env.COOKIE_EXPIRES_TIME * 24 * 60 * 60 * 1000
+      ),
+      httpOnly: true
   }
 
+  res.setHeader('Set-Cookie', `token=${token}; SameSite=None; Secure`);
 
-  res.status(statusCode).cookie('token', token, options).json({
-    success: true,
-    token,
-    user
+  res.status(statusCode).cookie("token", token, options).json({
+      success: true,
+      token,
+      user
   })
+};
 
-}
-
-module.exports = sendToken;
+module.exports = sendToken
