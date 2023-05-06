@@ -82,7 +82,8 @@ exports.forgotPassword = catchAsyncErrors(async (req, res, next) => {
   // Create reset password url
 
   //FOR DEPLOY WE NEED CHANGE THAT
-  const resetUrl = `${req.protocol}://${req.get('host')}/password/reset/${resetToken}`;
+  //const resetUrl = `${req.protocol}://${req.get('host')}/password/reset/${resetToken}`;
+  const resetUrl = `https://hanverker.netlify.app/password/reset/${resetToken}`;
 
   const message = `Tienes 30 minutos para restablecer su contrasela con el siguiente link:\n\n${resetUrl}\n\nSi no has solicitado este correo electrónico, ignóralo.`
 
